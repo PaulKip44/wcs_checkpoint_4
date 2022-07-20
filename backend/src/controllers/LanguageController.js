@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const models = require("../models");
 
 class LanguageController {
@@ -31,16 +33,35 @@ class LanguageController {
       });
   };
 
-  static delete = (req, res) => {
-    models.language
-      .delete(req.params.id)
-      .then(() => {
-        res.sendStatus(204);
+  static getOne = (req, res) => {
+    const languageId = parseInt(req.params.id, 10);
+
+    models.user
+      .find(languageId)
+      .then((language) => {
+        if (language.length === 0) {
+          res.sendStatus(404);
+        } else {
+          res.send(language[0]);
+        }
       })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+      .catch((err) => res.status(500).send(err));
+  };
+
+  static delete = async (req, res) => {
+    const id = parseInt(req.params.id, 10);
+
+    const removed = await models.language.getOne(id);
+
+    try {
+      await models.language.delete(id);
+      await fs.promises.unlink(
+        path.join(__dirname, `../../public/data/uploads/${removed.logo_name}`)
+      );
+      return res.status(200).json({ Succès: `language removed` });
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   };
 }
 
