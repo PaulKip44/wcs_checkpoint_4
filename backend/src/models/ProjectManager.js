@@ -1,21 +1,51 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
-  static table = "item";
+class ProjectManager extends AbstractManager {
+  static table = "project";
 
-  insert(item) {
+  insert(newProject) {
     return this.connection.query(
-      `insert into ${ItemManager.table} (title) values (?)`,
-      [item.title]
+      `insert into ${ProjectManager.table} (name,
+        source_image,
+        name_image,
+        source,
+        abstract,
+        client_name,
+        user_Id) 
+        values (?,?,?,?,?,?,?)`,
+      [
+        newProject.name,
+        newProject.source_image,
+        newProject.name_image,
+        newProject.source,
+        newProject.abstract,
+        newProject.client_name,
+        newProject.user_Id,
+      ]
     );
   }
 
-  update(item) {
+  modifyOne(ProjectId, newContents) {
     return this.connection.query(
-      `update ${ItemManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `UPDATE ${ProjectManager.table}
+      SET name = ?,
+      source_image = ? ,
+      name_image = ?,
+      source = ?,
+      abstract = ?,
+      client_name = ?,
+      user_Id= 1
+      WHERE id = ${ProjectId} `,
+      [
+        newContents.name,
+        newContents.source_image,
+        newContents.name_image,
+        newContents.source,
+        newContents.abstract,
+        newContents.client_name,
+      ]
     );
   }
 }
 
-module.exports = ItemManager;
+module.exports = ProjectManager;

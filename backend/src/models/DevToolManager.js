@@ -1,21 +1,19 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
-  static table = "item";
+class DevToolManager extends AbstractManager {
+  static table = "dev_tool";
 
-  insert(item) {
+  insert(newDevTool) {
     return this.connection.query(
-      `insert into ${ItemManager.table} (title) values (?)`,
-      [item.title]
-    );
-  }
-
-  update(item) {
-    return this.connection.query(
-      `update ${ItemManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `insert into ${DevToolManager.table} (name,source_logo,name_logo,user_Id) values (?,?,?,?)`,
+      [
+        newDevTool.name,
+        newDevTool.source_logo,
+        newDevTool.name_logo,
+        newDevTool.user_Id,
+      ]
     );
   }
 }
 
-module.exports = ItemManager;
+module.exports = DevToolManager;

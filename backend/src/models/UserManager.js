@@ -1,21 +1,20 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
+class UserManager extends AbstractManager {
   static table = "user";
 
-  insert(user) {
+  insert(newUser) {
     return this.connection.query(
-      `insert into ${ItemManager.table} (email,password) values (?,?)`,
-      [user.email, user.password]
+      `insert into ${this.table} (email,password) values (?,?)`,
+      [newUser.email, newUser.password]
     );
   }
 
-  update(item) {
-    return this.connection.query(
-      `update ${ItemManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
-    );
+  findByEmail(email) {
+    return this.connection
+      .query(`select * from  ${this.table} where email = ?`, [email])
+      .then(([result]) => result[0]);
   }
 }
 
-module.exports = ItemManager;
+module.exports = UserManager;

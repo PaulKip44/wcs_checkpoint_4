@@ -1,21 +1,19 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
-  static table = "item";
+class LanguageManager extends AbstractManager {
+  static table = "language";
 
-  insert(item) {
+  insert(newLanguage) {
     return this.connection.query(
-      `insert into ${ItemManager.table} (title) values (?)`,
-      [item.title]
-    );
-  }
-
-  update(item) {
-    return this.connection.query(
-      `update ${ItemManager.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `insert into ${LanguageManager.table} (name,source_logo,name_logo,user_Id) values (?,?,?,?)`,
+      [
+        newLanguage.name,
+        newLanguage.source_logo,
+        newLanguage.name_logo,
+        newLanguage.user_Id,
+      ]
     );
   }
 }
 
-module.exports = ItemManager;
+module.exports = LanguageManager;
