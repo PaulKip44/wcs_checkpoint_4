@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
-app.use(router);
+app.use("/api", router);
 
 const reactIndexFile = path.join(
   __dirname,

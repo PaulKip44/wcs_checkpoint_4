@@ -1,13 +1,34 @@
 const express = require("express");
 
-const { ItemController } = require("../controllers");
+const {
+  LanguageController,
+  DevToolController,
+  ProjectController,
+  AuthController,
+  UserController,
+} = require("../controllers");
 
 const router = express.Router();
 
-router.get("/items", ItemController.browse);
-router.get("/items/:id", ItemController.read);
-router.put("/items/:id", ItemController.edit);
-router.post("/items", ItemController.add);
-router.delete("/items/:id", ItemController.delete);
+const multer = require("../middlewares/multer");
+
+router.get("/user/:id", UserController.getOne);
+router.post("/user", UserController.addOne);
+
+router.post("/login", AuthController.login);
+router.get("/logout", AuthController.logout);
+
+router.get("/language", LanguageController.getAll);
+router.post("/language", multer, LanguageController.addOne);
+router.delete("/language/:id", LanguageController.delete);
+
+router.get("/devtool", DevToolController.getAll);
+router.post("/devtool", multer, DevToolController.addOne);
+router.delete("/devtool/:id", DevToolController.delete);
+
+router.get("/project", ProjectController.getAll);
+router.post("/project", multer, ProjectController.addOne);
+router.put("/project/:id", ProjectController.edit);
+router.delete("/project/:id", ProjectController.delete);
 
 module.exports = router;
