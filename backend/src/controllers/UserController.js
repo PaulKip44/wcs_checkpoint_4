@@ -5,7 +5,7 @@ class UserController {
   static addOne = async (req, res) => {
     const { password, email } = req.body;
 
-    models.user.findByUserEmailPassword(email).then((user) => {
+    models.user.findByEmail(email).then((user) => {
       if (user) {
         res.status(500).send("This email alredy exist");
       }

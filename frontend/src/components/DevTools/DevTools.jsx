@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import LanguagesOrSkill from "../LanguageOrSkill/LanguageOrSkill";
 import "./devTools.css";
+import CurrentUserContext from "../../contexts/currentUser";
 
 export default function Devtools() {
   const [listDevTools, setListDevTools] = useState([]);
 
   const [devToolName, setDevToolName] = useState("");
   const [devToolLogoName, setDevToolLogoName] = useState([]);
+
+  const { userProfil } = useContext(CurrentUserContext);
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -53,28 +56,30 @@ export default function Devtools() {
         ))}
       </ul>
 
-      <div>
-        <form onSubmit={handlePost}>
-          <label htmlFor="name">
-            <input
-              type="text"
-              name="name"
-              onChange={(e) => setDevToolName(e.target.value)}
-              placeholder="devTool"
-            />
-          </label>
+      {userProfil && (
+        <div>
+          <form onSubmit={handlePost}>
+            <label htmlFor="name">
+              <input
+                type="text"
+                name="name"
+                onChange={(e) => setDevToolName(e.target.value)}
+                placeholder="devTool"
+              />
+            </label>
 
-          <label htmlFor="logo_source">
-            <input
-              onChange={(e) => setDevToolLogoName(e.target.files)}
-              type="file"
-              name="name_logo"
-            />
-          </label>
+            <label htmlFor="logo_source">
+              <input
+                onChange={(e) => setDevToolLogoName(e.target.files)}
+                type="file"
+                name="name_logo"
+              />
+            </label>
 
-          <input type="submit" />
-        </form>
-      </div>
+            <input type="submit" />
+          </form>
+        </div>
+      )}
     </div>
   );
 }

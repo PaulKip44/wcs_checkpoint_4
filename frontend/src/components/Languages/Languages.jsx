@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import LanguagesOrSkill from "../LanguageOrSkill/LanguageOrSkill";
 import "./languages.css";
+import CurrentUserContext from "../../contexts/currentUser";
 
 export default function Languages() {
   const [listLanguages, setListLanguages] = useState([]);
 
   const [languageName, setlanguageName] = useState("");
   const [languageLogoName, setlanguageLogoName] = useState([]);
+
+  const { userProfil } = useContext(CurrentUserContext);
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -45,28 +48,30 @@ export default function Languages() {
         ))}
       </ul>
 
-      <div>
-        <form className="form" onSubmit={handlePost}>
-          <label htmlFor="name">
-            <input
-              type="text"
-              name="name"
-              onChange={(e) => setlanguageName(e.target.value)}
-              placeholder="language"
-            />
-          </label>
+      {userProfil && (
+        <div>
+          <form className="form" onSubmit={handlePost}>
+            <label htmlFor="name">
+              <input
+                type="text"
+                name="name"
+                onChange={(e) => setlanguageName(e.target.value)}
+                placeholder="language"
+              />
+            </label>
 
-          <label htmlFor="logo_source">
-            <input
-              onChange={(e) => setlanguageLogoName(e.target.files)}
-              type="file"
-              name="name_logo"
-            />
-          </label>
+            <label htmlFor="logo_source">
+              <input
+                onChange={(e) => setlanguageLogoName(e.target.files)}
+                type="file"
+                name="name_logo"
+              />
+            </label>
 
-          <input type="submit" />
-        </form>
-      </div>
+            <input type="submit" />
+          </form>
+        </div>
+      )}
     </div>
   );
 }

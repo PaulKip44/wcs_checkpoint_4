@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./languageOrSkill.css";
+import CurrentUserContext from "../../contexts/currentUser";
 
 // eslint-disable-next-line react/prop-types
 export default function LanguagesOrSkill({ langageOrSkill, type }) {
   const [del, setDel] = useState(true);
+  const { userProfil } = useContext(CurrentUserContext);
   let access = "language";
   if (type === "devtool") {
     access = "devtool";
@@ -38,9 +40,11 @@ export default function LanguagesOrSkill({ langageOrSkill, type }) {
             }
           </p>
 
-          <button type="button" onClick={deleteOne}>
-            Delete
-          </button>
+          {userProfil && (
+            <button type="button" onClick={deleteOne}>
+              Delete
+            </button>
+          )}
         </div>
       )}
     </>
