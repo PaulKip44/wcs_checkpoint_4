@@ -1,0 +1,6 @@
+.projet {
+  display: flex;
+  align-items: center;
+  margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+  justify-content: space-around;
+}
