@@ -9,7 +9,7 @@ export default function ItemProject({ project }) {
     <div className="projet">
       <a href={externLink}>
         <img
-          className="lokLogo"
+          className="item-image"
           src={`http://localhost:5000/data/uploads/${
             // eslint-disable-next-line react/prop-types
             project.name_image
@@ -18,7 +18,7 @@ export default function ItemProject({ project }) {
           alt={project.name_image}
         />
       </a>
-      <div>
+      <div className="project-content">
         {" "}
         <h1>
           {

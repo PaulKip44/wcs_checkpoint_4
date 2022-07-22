@@ -1,6 +1,9 @@
 .projet {
-  display: flex;
-  align-items: center;
-  margin: 0.3rem 0.3rem 0.3rem 0.3rem;
-  justify-content: space-around;
+ 
+  margin: 1rem 0.3rem 0.3rem 0.3rem;
+}
+
+.item-image{
+width: 40%;
+
 }
