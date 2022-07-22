@@ -5,13 +5,8 @@ class DevToolManager extends AbstractManager {
 
   insert(newDevTool) {
     return this.connection.query(
-      `insert into ${DevToolManager.table} (name,source_logo,name_logo,user_Id) values (?,?,?,?)`,
-      [
-        newDevTool.name,
-        newDevTool.source_logo,
-        newDevTool.name_logo,
-        newDevTool.user_Id,
-      ]
+      `insert into ${DevToolManager.table} (name,name_logo,user_Id) values (?,?,?)`,
+      [newDevTool.name, newDevTool.name_logo, newDevTool.user_Id]
     );
   }
 }

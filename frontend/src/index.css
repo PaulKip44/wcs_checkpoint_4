@@ -128,17 +128,31 @@ table {
   font-style: normal;
   font-weight: normal;
   src: local("Merriweather-Regular"),
-    url("./assets/fonts/Merriweather-Regular.ttf") format("truetype");
+    url("../assets/fonts/Merriweather-Regular.ttf") format("truetype");
 }
 
 .App {
-  background-color: var(--main-color);
-  font-family: "Merriweather", sans-serif;
+  background-color: rgb(195, 37, 37);
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+}
+
+#content-wrap {
+  min-height: calc(100vh - 280px);
+}
+
+@media screen and (min-width: 767.98px) {
+  #content-wrap {
+    min-height: calc(100vh - 205px);
+  }
 }
 
 /* VARIABLES */
 :root {
- 
+  /*Colors*/
+  --main-color: #e8af94;
+  --secondary-color: #f1e2d2;
+  --primary-text: #39424e;
 
   /* Font-Weight */
   --black: 900;

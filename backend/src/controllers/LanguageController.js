@@ -17,13 +17,13 @@ class LanguageController {
 
   static addOne = (req, res) => {
     const newLanguage = req.body;
-
+    const logoName = req.file.filename;
     // newLanguage = { name: "",
-    // source_logo: "",
+
     // name_logo: "" };
 
     models.language
-      .insert({ ...newLanguage, user_Id: 1 })
+      .insert({ ...newLanguage, name_logo: logoName, user_Id: 1 })
       .then(([result]) => {
         res.status(201).send({ ...newLanguage, id: result.insertId });
       })
@@ -36,7 +36,7 @@ class LanguageController {
   static getOne = (req, res) => {
     const languageId = parseInt(req.params.id, 10);
 
-    models.user
+    models.language
       .find(languageId)
       .then((language) => {
         if (language.length === 0) {
@@ -51,12 +51,16 @@ class LanguageController {
   static delete = async (req, res) => {
     const id = parseInt(req.params.id, 10);
 
-    const removed = await models.language.getOne(id);
+    const removed = await models.language.find(id);
 
     try {
       await models.language.delete(id);
+
       await fs.promises.unlink(
-        path.join(__dirname, `../../public/data/uploads/${removed.logo_name}`)
+        path.join(
+          __dirname,
+          `../../public/data/uploads/${removed[0][0].name_logo}`
+        )
       );
       return res.status(200).json({ Succès: `language removed` });
     } catch (error) {

@@ -5,13 +5,8 @@ class LanguageManager extends AbstractManager {
 
   insert(newLanguage) {
     return this.connection.query(
-      `insert into ${LanguageManager.table} (name,source_logo,name_logo,user_Id) values (?,?,?,?)`,
-      [
-        newLanguage.name,
-        newLanguage.source_logo,
-        newLanguage.name_logo,
-        newLanguage.user_Id,
-      ]
+      `insert into ${LanguageManager.table} (name,name_logo,user_Id) values (?,?,?)`,
+      [newLanguage.name, newLanguage.name_logo, newLanguage.user_Id]
     );
   }
 }
