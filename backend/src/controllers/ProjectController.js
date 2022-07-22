@@ -20,7 +20,7 @@ class ProjectController {
 
     // newProject = {
     //   name: "",
-    //   source_image: "",
+
     //   name_image: "",
     //   source: "",
     //   abstract: "",

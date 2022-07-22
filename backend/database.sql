@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `checkpoint4`.`user` (
 CREATE TABLE IF NOT EXISTS `checkpoint4`.`language` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
-  `source_logo` VARCHAR(1000) NOT NULL,
   `name_logo` VARCHAR(150) NOT NULL,
   `user_Id` INT NOT NULL,
   PRIMARY KEY (`Id`, `user_Id`),
@@ -52,7 +51,6 @@ CREATE TABLE IF NOT EXISTS `checkpoint4`.`language` (
 CREATE TABLE IF NOT EXISTS `checkpoint4`.`dev_tool` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
-  `source_logo` VARCHAR(1000) NOT NULL,
   `name_logo` VARCHAR(150) NOT NULL,
   `user_Id` INT NOT NULL,
   PRIMARY KEY (`Id`, `user_Id`),
@@ -70,7 +68,6 @@ CREATE TABLE IF NOT EXISTS `checkpoint4`.`dev_tool` (
 CREATE TABLE IF NOT EXISTS `checkpoint4`.`project` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
-  `source_image` VARCHAR(1000) NOT NULL,
   `name_image` VARCHAR(150) NOT NULL,
   `source` VARCHAR(1000) NOT NULL,
   `abstract` VARCHAR(2000) NOT NULL,

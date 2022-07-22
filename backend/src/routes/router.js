@@ -18,10 +18,12 @@ router.post("/user", UserController.addOne);
 router.post("/login", AuthController.login);
 router.get("/logout", AuthController.logout);
 
+router.get("/language/:id", LanguageController.getOne);
 router.get("/language", LanguageController.getAll);
 router.post("/language", multer, LanguageController.addOne);
 router.delete("/language/:id", LanguageController.delete);
 
+router.get("/devtool/:id", DevToolController.getOne);
 router.get("/devtool", DevToolController.getAll);
 router.post("/devtool", multer, DevToolController.addOne);
 router.delete("/devtool/:id", DevToolController.delete);

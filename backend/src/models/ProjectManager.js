@@ -6,16 +6,15 @@ class ProjectManager extends AbstractManager {
   insert(newProject) {
     return this.connection.query(
       `insert into ${ProjectManager.table} (name,
-        source_image,
+        
         name_image,
         source,
         abstract,
         client_name,
         user_Id) 
-        values (?,?,?,?,?,?,?)`,
+        values (?,?,?,?,?,?)`,
       [
         newProject.name,
-        newProject.source_image,
         newProject.name_image,
         newProject.source,
         newProject.abstract,
